@@ -16,6 +16,7 @@ soup = BeautifulSoup(html_content, "html.parser")
 
 # gets all the links to each header
 links = [a.get("href") for a in soup.find_all("a", href=True)]
+print(links)
 
 lab_response = None
 for link in links:
@@ -27,10 +28,10 @@ if lab_response and lab_response.status_code == 200:
     lab_html_content = lab_response.text
     lab_soup = BeautifulSoup(lab_html_content, "html.parser")
     
-    for lab_link in lab_soup.find_all("a", href=True):
+    for lab_link in lab_soup.select('[class=toclink]'):
         print(lab_link.get("href"))
 else:
     print("Failed to retrieve Lab webpage or 'Lab_Materials.html' not found")
 
 
-    #Rohan Test
+ #Rohan Test
